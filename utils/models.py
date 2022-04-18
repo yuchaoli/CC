@@ -129,7 +129,7 @@ def cal_metric(org_weight,
             v = v.cuda()
             use_rank_num = min(
                 now_weight.shape[0], reduce(
-                    mul, now_weight.shape[1:3])) - eigenvalue_zero_num
+                    mul, now_weight.shape[1:])) - eigenvalue_zero_num
             for k in range(use_rank_num):
                 org_value = s[k].item()
                 s[k] = 0
@@ -481,7 +481,7 @@ def cal_compress_ratio(org_layers, grads, compress_ratio, layer_input_sizes,
         input_size = layer_input_sizes[i]
         layer_flop = layer_flops[i]
         channel_num = weight.shape[1]
-        rank_num = min(weight.shape[0], reduce(mul, weight.shape[1:3]))
+        rank_num = min(weight.shape[0], reduce(mul, weight.shape[1:]))
 
         if len(weight.shape) == 4:
             out_h = int((input_size[0] + 2 * layer.padding[0] -
