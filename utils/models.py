@@ -68,7 +68,7 @@ def cal_metric(org_weight,
 
     num = now_weight.shape[1] - len(pruning_index) + min(
         now_weight.shape[0], reduce(
-            mul, now_weight.shape[1:3])) - eigenvalue_zero_num
+            mul, now_weight.shape[1:])) - eigenvalue_zero_num
 
     metrics = []
     for j in range(len(com_ops)):
@@ -293,7 +293,7 @@ def param_all_compress(layer,
 
     pruning_index = []
     eigenvalue_zero_num = 0
-    rank = min(weight.shape[0], reduce(mul, weight.shape[1:3]))
+    rank = min(weight.shape[0], reduce(mul, weight.shape[1:]))
     new_weight = torch.clone(weight)
     use_ops = 'all'
 
